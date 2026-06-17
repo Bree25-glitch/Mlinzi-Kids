@@ -81,7 +81,7 @@ Test the demo:
 - [ ] Multi-language: Swahili + English
 
  About
-Built by [MELVINE  AND ZAMZAM] - Web Developer & Product Designer  
+Built by [MELVINE  AND ZAMZAM] - Web Developers & Product Designer  
 Location: Mombasa, Kenya  
 Contact: +254792829040/0700604442 | sabenciazam@gmail.com/okeyomelvine6@gmail.com
 
@@ -94,4 +94,4 @@ Created for educational/pitch purposes to showcase product design and user exper
 MIT License - feel free to use this for learning or inspiration.
 
 ---
-Made with ❤️ for Kenyan parents who want peace of mind
+Made with for Kenyan parents who want peace of mind
