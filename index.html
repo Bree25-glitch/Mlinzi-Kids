@@ -13,7 +13,9 @@
 <!-- NAV -->
 <nav>
   <div class="container nav-wrap">
-    <div class="logo-text">Mlinzi Kids</div>
+    <div class="logo-text">
+      Mlinzi Kids
+    </div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home">Home</a></li>
       <li><a href="#tracking">Tracking</a></li>
@@ -22,9 +24,7 @@
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><button class="theme-btn" onclick="toggleTheme()">🌙</button></li>
     </ul>
-    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   </div>
 </nav>
 
@@ -32,7 +32,7 @@
 <section class="hero" id="home">
   <div class="container hero-content">
     <img src="Mlinzi.png" alt="Mlinzi Kids Logo" class="hero-logo">
-    <h1>Know Where Your Child Is, Anytime.</h1>
+    <h1>Keep your child safe & visible at all times.</h1>
     <p>Mlinzi Kids GPS tracking button gives you real-time location updates of your child's whereabouts. Monitor their activities, receive instant danger alerts, and keep them safe with 24/7 parental tracking. No bracelet. Just a simple button with powerful GPS tracking.</p>
     <div>
       <a href="#tracking" class="btn">Track Your Child Now</a>
@@ -257,7 +257,7 @@
       <div class="error" id="msgError">Message must be at least 10 characters</div>
       
       <button type="submit" class="submit">Send Message</button>
-      <p id="success" style="color:var(--green);display:none;text-align:center">Thank you! We'll contact you within 24 hours via WhatsApp to set up tracking.</p>
+      <p id="success" style="color:var(--green);display:none;text-align:center">Thank you! We'll contact you within 6 hours via WhatsApp/SMS to set up tracking.</p>
     </form>
   </div>
 </section>
@@ -287,6 +287,46 @@
     </div>
   </div>
 </div>
+
+
+
+
+          <!-- Contact Form -->
+          <form class="contact-form" id="contactForm">
+            <input 
+              type="text" 
+              name="name" 
+              placeholder="Your Name" 
+              required
+            >
+
+            <input 
+              type="email" 
+              name="email" 
+              placeholder="Your Email" 
+              required
+            >
+
+            <input 
+              type="text" 
+              name="subject" 
+              placeholder="Subject" 
+              required
+            >
+
+            <textarea 
+              name="message" 
+              placeholder="Your Message" 
+              rows="6" 
+              required
+            ></textarea>
+
+            <button type="submit" class="btn">Send Message</button>
+            <p id="formMessage" class="form-message"></p>
+          </form>
+        </div>
+      </div>
+    </section>
 <!-- FOOTER -->
 <footer>
   <div class="container">
