@@ -113,6 +113,7 @@ function orderWhatsApp(plan, price){
 
 document.addEventListener('DOMContentLoaded', () => {
   initCarousel('galleryCarousel', '.gallery-prev', '.gallery-next');
+  initCarousel('teamCarousel', '.team-prev', '.team-next');
 });
 
 // --- Parent tracking: pairing, simulated GPS, parent dashboard ---
