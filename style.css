@@ -157,6 +157,12 @@ h2{font-size:clamp(2rem,4vw,2.8rem);
 .carousel-btn.prev{left:0.5rem;}
 .carousel-btn.next{right:0.5rem;}
 
+/* Carousel Indicators */
+.carousel-indicators{display:flex;justify-content:center;gap:0.5rem;margin-top:1.5rem;}
+.carousel-indicator{width:10px;height:10px;border-radius:50%;background:var(--muted);cursor:pointer;transition:all 0.3s;border:2px solid transparent;}
+.carousel-indicator.active{background:var(--blue);width:32px;border-radius:5px;}
+.carousel-indicator:hover{background:var(--blue);opacity:0.7;}
+
 @media(min-width:768px){
   .carousel-card{flex:0 0 calc(50% - 0.75rem);}
 }

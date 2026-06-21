@@ -91,16 +91,107 @@ function initCarousel(carouselId, prevSelector, nextSelector){
   if(!carousel) return;
   const prevBtn = document.querySelector(prevSelector);
   const nextBtn = document.querySelector(nextSelector);
+  const indicatorsContainer = document.getElementById(carouselId.replace('Carousel', 'Indicators'));
 
+  const cards = carousel.querySelectorAll('.carousel-card');
+  const cardCount = cards.length;
+  let currentIndex = 0;
+  
+  // Auto-slide variables
+  let autoSlideInterval = null;
+  const AUTO_SLIDE_DELAY = 5000; // 5 seconds
+  let touchStartX = 0;
+  let touchEndX = 0;
+  
+  // Create indicators
+  if(indicatorsContainer) {
+    cards.forEach((_, index) => {
+      const dot = document.createElement('div');
+      dot.className = `carousel-indicator ${index === 0 ? 'active' : ''}`;
+      dot.addEventListener('click', () => goToSlide(index));
+      indicatorsContainer.appendChild(dot);
+    });
+  }
+  
   const scrollDistance = () => Math.min(carousel.clientWidth * 0.9, carousel.scrollWidth);
+  
+  // Update indicators based on current position
+  function updateIndicators() {
+    const scrollLeft = carousel.scrollLeft;
+    const cardWidth = carousel.offsetWidth * 0.9;
+    currentIndex = Math.round(scrollLeft / cardWidth);
+    
+    document.querySelectorAll(`#${carouselId.replace('Carousel', 'Indicators')} .carousel-indicator`).forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentIndex);
+    });
+  }
+  
+  // Go to specific slide
+  function goToSlide(index) {
+    const scrollDistance = index * (carousel.offsetWidth * 0.9 + 24); // 24px is the gap
+    carousel.scrollTo({ left: scrollDistance, behavior: 'smooth' });
+    resetAutoSlide();
+  }
+  
+  // Function to auto-advance carousel
+  function autoSlide() {
+    const nextIndex = (currentIndex + 1) % cardCount;
+    goToSlide(nextIndex);
+  }
+  
+  // Start auto-sliding
+  function startAutoSlide() {
+    if(autoSlideInterval) clearInterval(autoSlideInterval);
+    autoSlideInterval = setInterval(autoSlide, AUTO_SLIDE_DELAY);
+  }
+  
+  // Pause and restart auto-slide
+  function resetAutoSlide() {
+    clearInterval(autoSlideInterval);
+    startAutoSlide();
+  }
 
   prevBtn?.addEventListener('click', () => {
     carousel.scrollBy({ left: -scrollDistance(), behavior: 'smooth' });
+    resetAutoSlide();
+    setTimeout(updateIndicators, 300);
   });
 
   nextBtn?.addEventListener('click', () => {
     carousel.scrollBy({ left: scrollDistance(), behavior: 'smooth' });
+    resetAutoSlide();
+    setTimeout(updateIndicators, 300);
   });
+  
+  // Scroll event listener for indicator updates
+  carousel.addEventListener('scroll', updateIndicators);
+  
+  // Touch/swipe support
+  carousel.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    clearInterval(autoSlideInterval);
+  });
+  
+  carousel.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    if(touchStartX - touchEndX > 50) {
+      // Swiped left
+      carousel.scrollBy({ left: scrollDistance(), behavior: 'smooth' });
+    } else if(touchEndX - touchStartX > 50) {
+      // Swiped right
+      carousel.scrollBy({ left: -scrollDistance(), behavior: 'smooth' });
+    }
+    resetAutoSlide();
+    setTimeout(updateIndicators, 300);
+  });
+  
+  // Pause on hover
+  carousel.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+  carousel.addEventListener('mouseleave', startAutoSlide);
+  
+  // Start auto-sliding when carousel is initialized
+  startAutoSlide();
+  updateIndicators();
 }
 
 // WHATSAPP ORDER BUTTON
